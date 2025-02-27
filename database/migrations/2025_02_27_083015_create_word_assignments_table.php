@@ -17,11 +17,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->date('assigned_date');
 
-            // Define the foreign key constraint for team_id
+            // Define the foreign key constraint for team_id and word_id
             $table->foreignIdFor(Team::class)->onDelete('cascade');
-
-            // Define the foreign key constraint for word_id
-            $table->foreign(Word::class)->onDelete('cascade');
+            $table->foreignIdFor(Word::class)->onDelete('cascade');
 
             $table->timestamps();
         });

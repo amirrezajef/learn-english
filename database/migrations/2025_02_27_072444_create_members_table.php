@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('team_members', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('team_id');
-            $table->uuid('user_id');
-            $table->enum('role', ['member', 'admin'])->default('member');
-            $table->timestamp('joined_at')->useCurrent();
-            $table->timestamps();
 
             // Foreign key constraints
             $table->foreignIdFor(Team::class)->onDelete('cascade');
             $table->foreignIdFor(User::class)->onDelete('cascade');
+
+            $table->enum('role', ['member', 'admin'])->default('member');
+            $table->timestamp('joined_at')->useCurrent();
+            $table->timestamps();
+
         });
     }
 

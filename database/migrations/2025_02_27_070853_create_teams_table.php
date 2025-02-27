@@ -14,14 +14,15 @@ return new class extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->uuid('id')->primary();
+
+            // Foreign key constraint for team creator and owner
+            $table->foreignIdFor(User::class, 'creator_id');
+            $table->foreignIdFor(User::class, 'owner_id');
+
             $table->string('name', 255);
             $table->text('description')->nullable();
             $table->timestamps();
 
-            // Foreign key constraint for team creator
-            $table->foreignIdFor(User::class, 'creator_id');
-            // Foreign key constraint for team owner
-            $table->foreignIdFor(User::class, 'owner_id');
 
         });
     }

@@ -14,6 +14,10 @@ return new class extends Migration
     {
         Schema::create('word_quizzes', function (Blueprint $table) {
             $table->uuid('id')->primary();
+
+            // Define the foreign key constraint
+            $table->foreignIdFor(Word::class)->onDelete('cascade');
+
             $table->string('question_text', 255);
             $table->text('hint')->nullable();
             $table->enum('difficulty_level', ['easy', 'medium', 'hard'])->default('medium');
@@ -21,10 +25,6 @@ return new class extends Migration
             $table->text('correct_answer');
             $table->json('options')->nullable();
             $table->timestamps();
-
-            // Define the foreign key constraint
-            $table->foreignIdFor(Word::class)->onDelete('cascade');
-
         });
     }
 

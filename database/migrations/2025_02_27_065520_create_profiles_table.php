@@ -14,6 +14,10 @@ return new class extends Migration
     {
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->uuid('id')->primary();
+
+            // Foreign key constraint
+            $table->foreignIdFor(User::class)->unique()->onDelete('cascade');
+
             $table->string('first_name');
             $table->string('last_name');
             $table->string('avatar_url', 255)->nullable();
@@ -22,8 +26,6 @@ return new class extends Migration
             $table->string('timezone', 255)->default('UTC');
             $table->timestamps();
 
-            // Foreign key constraint
-            $table->foreignIdFor(User::class)->onDelete('cascade')->unique();
         });
     }
 
